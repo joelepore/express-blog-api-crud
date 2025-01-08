@@ -1,13 +1,27 @@
 const posts = require('../data/posts');
 
 const index = (req, res) => {
-  res.json(posts);
+  let filteredPosts = posts;
+
+  if (req.query.tag) {
+    filteredPosts = filteredPosts.filter(post => post.tags.includes(req.query.tag));
+  }
+  res.json(filteredPosts);
 }
 
 const show = (req, res) => {
   const id = parseInt(req.params.id);
-  const post = posts.find(post => post.id === id) ?? { result: 'Post not found' };
-  res.json(post);
+  const post = posts.find(post => post.id === id);
+
+  if (!post) {
+    res.status(404).json({
+      message: 'Post not found',
+      status: 404,
+      error: 'Not Found'
+    });
+  } else {
+    res.json(post);
+  }
 }
 
 const store = (req, res) => {
