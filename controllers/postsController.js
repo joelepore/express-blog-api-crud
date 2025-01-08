@@ -23,7 +23,19 @@ const modify = (req, res) => {
 }
 
 const destroy = (req, res) => {
-  res.send(`Rotta DESTROY: elimino il post con id ${req.params.id}`);
+  const id = parseInt(req.params.id);
+  const postIndex = posts.findIndex(post => post.id === id);
+
+  if (postIndex > -1) {
+    posts.splice(postIndex, 1);
+    res.sendStatus(204);
+  } else {
+    res.status(404).json({
+      message: 'Post not found',
+      status: 404,
+      error: 'Not Found'
+    })
+  }
 }
 
 module.exports = {
