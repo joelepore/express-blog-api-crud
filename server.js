@@ -5,6 +5,8 @@ const port = 3000;
 // Routers
 const postsRouter = require('./routers/posts');
 
+// Imposto il body parser json
+app.use(express.json());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
