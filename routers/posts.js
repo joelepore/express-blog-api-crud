@@ -1,5 +1,6 @@
 const express = require('express');
 const postsController = require('../controllers/postsController');
+const postStoreValidator = require('../middlewares/validation/postStoreValidator');
 
 const router = express.Router();
 
@@ -8,7 +9,7 @@ router.get('/', postsController.index);
 // Show
 router.get('/:id', postsController.show);
 // Store
-router.post('/', postsController.store);
+router.post('/', postStoreValidator, postsController.store);
 
 // Update
 router.put('/:id', postsController.update);
