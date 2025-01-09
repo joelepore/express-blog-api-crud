@@ -1,9 +1,11 @@
 // Express
 const express = require('express');
+const errorsHandler = require('./middlewares/errorsHandler');
+const notFound = require('./middlewares/notFound');
+const postsRouter = require('./routers/posts');
+
 const app = express();
 const port = 3000;
-// Routers
-const postsRouter = require('./routers/posts');
 
 // Imposto il body parser json
 app.use(express.json());
@@ -14,5 +16,9 @@ app.get('/', (req, res) => {
 })
 
 app.use('/posts', postsRouter);
+
+// Error handlers
+app.use(errorsHandler);
+app.use(notFound);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
