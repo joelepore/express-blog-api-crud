@@ -2,6 +2,7 @@ const express = require('express');
 const postsController = require('../controllers/postsController');
 const postStoreValidator = require('../middlewares/validation/postStoreValidator');
 const postUpdateValidator = require('../middlewares/validation/postUpdateValidator');
+const postModifyValidator = require('../middlewares/validation/postModifyValidator');
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.post('/', postStoreValidator, postsController.store);
 router.put('/:id', postUpdateValidator, postsController.update);
 
 // Modify
-router.patch('/:id', postsController.modify);
+router.patch('/:id', postModifyValidator, postsController.modify);
 
 // Destroy
 router.delete('/:id', postsController.destroy)
