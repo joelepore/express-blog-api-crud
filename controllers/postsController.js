@@ -25,8 +25,13 @@ const show = (req, res) => {
 }
 
 const store = (req, res) => {
-  console.log(req.body)
-  res.send(`Rotta STORE: creo un nuovo post`);
+  const newId = posts.at(-1).id + 1;
+  const newPost = {
+    id: newId,
+    ...req.body
+  }
+  posts.push(newPost);
+  res.status(201).json(posts);
 }
 
 const update = (req, res) => {
