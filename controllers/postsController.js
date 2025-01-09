@@ -35,11 +35,39 @@ const store = (req, res) => {
 }
 
 const update = (req, res) => {
-  res.send(`Rotta UPDATE: modifico interamente il post con id ${req.params.id}`);
+  const id = parseInt(req.params.id);
+  const post = posts.find(post => post.id === id);
+
+  if (post) {
+    for (let key in req.body) {
+      post[key] = req.body[key];
+    }
+    res.json(post);
+  } else {
+    res.status(404).json({
+      message: 'Post not found',
+      status: 404,
+      error: 'Not Found'
+    })
+  }
 }
 
 const modify = (req, res) => {
-  res.send(`Rotta MODIFY: modifico parzialmente il post con id ${req.params.id}`);
+  const id = parseInt(req.params.id);
+  const post = posts.find(post => post.id === id);
+
+  if (post) {
+    for (let key in req.body) {
+      post[key] = req.body[key];
+    }
+    res.json(post);
+  } else {
+    res.status(404).json({
+      message: 'Post not found',
+      status: 404,
+      error: 'Not Found'
+    })
+  }
 }
 
 const destroy = (req, res) => {
