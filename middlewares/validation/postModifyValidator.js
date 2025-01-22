@@ -7,8 +7,8 @@ const postModifyValidator = (req, res, next) => {
     message = 'Slug must be a string';
   } else if (post.content && typeof post.content !== 'string') {
     message = 'Content must be a string';
-  } else if (post.image && typeof post.image !== 'string' && (!post.image.endsWith('.jpeg') && !post.image.endsWith('.png'))) {
-    message = 'Image must be a string and of a valid type (jpeg/png)';
+  } else if (post.image && typeof post.image !== 'string') {
+    message = 'Image must be a string';
   } else if (post.tags && !Array.isArray(post.tags)) {
     message = 'Tags must be an array';
   }
